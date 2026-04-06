@@ -1,0 +1,23 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    user: 1028:100               # user et group ID de user_navidrome
+    volumes:
+      - ./data:/data
+      - /volume1/Fichiers/Music:/music    # dossier pour les musiques
+    ports:
+      - "4533:4533"
+    environment:
+      ND_DEFAULTLANGUAGE: "fr"
+      ND_SCANSCHEDULE: "0 * * * *"     # toutes les heures
+      ND_LOGLEVEL: warn
+      ND_SESSIONTIMEOUT: 2h
+      ND_COVERJPEGQUALITY: 90          # niveau de qualité pour les jpg dont la taille est convertie
+      ND_ENABLECOVERANIMATION: false   # animation tournante lorsq'une piste est jouée
+      ND_LASTFM_ENABLED: false         # disable Last.fm
+      ND_LISTENBRAINZ_ENABLED: false   # disable listenbrainz
+      ND_ENABLEFAVOURITES: false       # supprime les favoris
+      ND_ENABLESTARRATING: false       # supprime les étoiles insuportables
+      ND_ENABLEDOWNLOADS: true         # on ne peut pas télécharger d'albums à partir de Navidrome

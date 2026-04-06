@@ -1,0 +1,21 @@
+name: open-webui
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434 # installation locale d'Ollama
+    volumes:
+      - ./data:/app/backend/data
+
+# liste des modèles :
+#   gemma3:4b
+#   qwen3-4b-thinking:Q6_K
+#   llama3.2-3b-instruct:Q6_K_L
+#   qwen3-moe-6.8b-uncensored:Q6_K
+#   llama3.2-3b-instruct-uncensored:Q6_K_L
+#   wizard-vicuna-7b-uncensored:Q5_K_S

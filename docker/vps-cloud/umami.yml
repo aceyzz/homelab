@@ -1,0 +1,19 @@
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    restart: unless-stopped
+    container_name: umami
+    env_file: .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - umami-db:/var/lib/postgresql/data
+
+volumes:
+  umami-db:
+    name: umami-db

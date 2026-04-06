@@ -1,0 +1,12 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    environment:
+      - SECURITY_ENABLELOGIN=false
+      - LANGS=fr_FR
+    ports:
+      - '5005:8080'
+    volumes:
+      - ./data:/configs
+    restart: unless-stopped
